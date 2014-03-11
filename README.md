@@ -1,24 +1,24 @@
 ApatiteControler
 ===================
 
-Bukkit-плагин для разделение миров. Предоставляет следующий функционал:
+Bukkit-РїР»Р°РіРёРЅ РґР»СЏ СЂР°Р·РґРµР»РµРЅРёРµ РјРёСЂРѕРІ. РџСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ СЃР»РµРґСѓСЋС‰РёР№ С„СѓРЅРєС†РёРѕРЅР°Р»:
 
-- Разграничение инвентаря
-- Возможность настроить невидимисть игрока
-- Запрет на интеракт с животными
+- Р Р°Р·РіСЂР°РЅРёС‡РµРЅРёРµ РёРЅРІРµРЅС‚Р°СЂСЏ
+- Р’РѕР·РјРѕР¶РЅРѕСЃС‚СЊ РЅР°СЃС‚СЂРѕРёС‚СЊ РЅРµРІРёРґРёРјРёСЃС‚СЊ РёРіСЂРѕРєР°
+- Р—Р°РїСЂРµС‚ РЅР° РёРЅС‚РµСЂР°РєС‚ СЃ Р¶РёРІРѕС‚РЅС‹РјРё
 
-Лицензия
+Р›РёС†РµРЅР·РёСЏ
 ===================
 
-Исходные коды лицензированы под лицензией Attribution 4.0 International
+РСЃС…РѕРґРЅС‹Рµ РєРѕРґС‹ Р»РёС†РµРЅР·РёСЂРѕРІР°РЅС‹ РїРѕРґ Р»РёС†РµРЅР·РёРµР№ Attribution 4.0 International
 http://creativecommons.org/licenses/by/4.0/
 
 You are free to:
 
-Share — copy and redistribute the material in any medium or format
-Adapt — remix, transform, and build upon the material
+Share вЂ” copy and redistribute the material in any medium or format
+Adapt вЂ” remix, transform, and build upon the material
 for any purpose, even commercially.
 The licensor cannot revoke these freedoms as long as you follow the license terms.
 
 Under the following terms:
-Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+Attribution вЂ” You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.  
