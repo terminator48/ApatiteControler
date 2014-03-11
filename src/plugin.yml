@@ -1,0 +1,18 @@
+name: ApatiteControler
+main: apatitecontroler.ApatiteControler
+description: ApatiteServers main control plugin
+version: 2.0
+commands:
+   changehub:
+       description: Change world
+       usage: /<command>
+       aliases: [hubchange,hubch,hub,world,hc,hchange,hc,changeh]
+   hublist:
+       description: List worlds
+       usage: /<command>
+   setworldspawn:
+       description: setworldspawn
+       usage: /<command>
+   spawn:
+       description: teleport to spawn
+       usage: /<command>
