@@ -1,0 +1,10 @@
+enabled: true # Активирован ли плагин
+separate_inventories: true # Разделять инвентари
+enable_reload_countdown: true # Активировать обратный отсчёт при перезагрузке сервера
+
+worlds: # Настройка миров
+    world:
+        canInteract: true # разрешить взаимодействие с мобами
+        gamemode: survival # Игровой режим для мира (creative/adventure)
+        spawnRaduis: 16 # Радиус спавна
+        invisibleOnSpawn: true # Невидимость на спавне

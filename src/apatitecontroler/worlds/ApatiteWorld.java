@@ -16,5 +16,4 @@ public abstract class ApatiteWorld {
     public abstract boolean canInteract();
     public abstract GameMode getDefaultGamemode();
     //public abstract boolean isInvicibleOnSpawn();
-
 }

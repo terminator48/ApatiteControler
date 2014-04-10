@@ -25,13 +25,11 @@ public class HubCommand implements CommandExecutor{
        if(!(arg0 instanceof Player)) return true;
        Player pl = (Player) arg0;
        String worldName;
+       
        if(arg3.length == 0) worldName = Utils.getDefaultWorld(); else worldName = arg3[0];
-       World wl = Bukkit.getWorld(worldName);
-       if(wl == null){Utils.sendMsg(pl,ChatColor.RED+"Мир '"+worldName+"' не найден!"); return true;}
-       if(Utils.hasPermission(pl, "ac.teleport."+wl.getName())){
-           Utils.sendMsg(pl,ChatColor.RED+"У вас недостаточно прав телепортироваться в мир "+wl.getName()+"!"); return true;}
-       pl.teleport(new Location(wl, wl.getSpawnLocation().getX(),wl.getSpawnLocation().getY(),wl.getSpawnLocation().getZ()));
-       Utils.sendMsg(pl,ChatColor.GREEN+"Телепортирую!");
+       
+       Utils.teleportPlayerToWorld(pl, worldName);
+       
        return true;
    }
 }

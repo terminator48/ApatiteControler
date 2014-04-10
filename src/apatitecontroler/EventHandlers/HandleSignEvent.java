@@ -5,6 +5,7 @@
 package apatitecontroler.EventHandlers;
 
 import apatitecontroler.Utils;
+import apatitecontroler.worlds.ApatiteWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -33,13 +34,8 @@ public class HandleSignEvent implements Listener{
                 Sign sn = (Sign) event.getClickedBlock().getState();
                 //APATITE TELEPORTER
                 if((ChatColor.GREEN+"[AT]").equals(sn.getLine(0))){
-                    String worldName = sn.getLine(1);
-                     World wl = Bukkit.getWorld(worldName);
-                     if(wl == null){Utils.sendMsg(pl,ChatColor.RED+"Мир '"+worldName+"' не найден!"); return true;}
-                     if(!(Utils.hasPermission(pl,"ac.teleport."+wl.getName()))){
-                         Utils.sendMsg(pl,ChatColor.RED+"У вас недостаточно прав телепортироваться в мир "+wl.getName()+"!"); return false;}
-                     pl.teleport(new Location(wl, wl.getSpawnLocation().getX(),wl.getSpawnLocation().getY(),wl.getSpawnLocation().getZ()));
-                     Utils.sendMsg(pl,ChatColor.GREEN+"Телепортирую!");
+                     String worldName = sn.getLine(1);
+                     Utils.teleportPlayerToWorld(pl, worldName);
                      return true;
                   }
                 //APATITE COMMAND EXECUTOR
