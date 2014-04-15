@@ -61,6 +61,7 @@ public class MainWorldPlayerControler  implements Listener{
     @EventHandler
     public void onPlayerTeleport(PlayerTeleportEvent e){
         ApatiteWorld aw = Utils.getWorld(e.getTo().getWorld().getName());
+        if(aw == null) return;
         if(!aw.isInvicibleOnSpawn()) e.getPlayer().removePotionEffect(PotionEffectType.INVISIBILITY);
         GameMode gm = aw.getDefaultGamemode();
         if(!gm.equals(e.getPlayer().getGameMode())){
