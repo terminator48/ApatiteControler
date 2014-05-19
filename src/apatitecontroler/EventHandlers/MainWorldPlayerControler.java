@@ -27,6 +27,7 @@ public class MainWorldPlayerControler  implements Listener{
     @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent e){
         ApatiteWorld aw= Utils.getWorld(e.getPlayer().getLocation().getWorld().getName());        
+        if(aw == null) return;
         if(!aw.canInteract()){
             e.setCancelled(true);
         }   
@@ -36,6 +37,7 @@ public class MainWorldPlayerControler  implements Listener{
         if(e.getDamager() instanceof Player) {
             Player pl = (Player) e.getDamager();
         ApatiteWorld aw= Utils.getWorld(pl.getLocation().getWorld().getName());        
+        if(aw == null) return;
         if(!aw.canInteract() && pl.getWorld().getSpawnLocation().distance(pl.getLocation()) <=aw.getSpawnRadius()){
             e.setCancelled(true);
         }   
@@ -48,7 +50,8 @@ public class MainWorldPlayerControler  implements Listener{
     }*/
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e){
-        ApatiteWorld aw= Utils.getWorld(e.getPlayer().getLocation().getWorld().getName());
+        ApatiteWorld aw = Utils.getWorld(e.getPlayer().getLocation().getWorld().getName());
+        if(aw == null) return;
         if(e.getTo().getBlockY() < 0) e.getPlayer().teleport(Bukkit.getWorld(Utils.getDefaultWorld()).getSpawnLocation());
         
         if(aw.isInvicibleOnSpawn()){
