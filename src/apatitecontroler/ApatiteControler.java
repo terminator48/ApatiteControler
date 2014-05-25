@@ -8,15 +8,18 @@ import apatitecontroler.ApatiteScavenger.commands.WorldSpawnSetCommand;
 import apatitecontroler.ApatiteScavenger.commands.HubCommand;
 import apatitecontroler.ApatiteScavenger.commands.SpawnCommand;
 import apatitecontroler.ApatiteScavenger.RestorationManager;
+import apatitecontroler.ApatiteScavenger.enderchest.EnderchestManager;
 
 import apatitecontroler.EventHandlers.HandleSignEvent;
 import apatitecontroler.EventHandlers.InventorySaver;
 import apatitecontroler.EventHandlers.MainWorldPlayerControler;
 import apatitecontroler.worlds.EmptyWorld;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,6 +29,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.InvalidDescriptionException;
+import org.bukkit.plugin.InvalidPluginException;
+import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -33,9 +39,12 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Daniil
  */
 public class ApatiteControler extends JavaPlugin implements Listener, CommandExecutor {
-
+    public static int version = 3;
+    public static boolean safeMode = false;
+    
     public static final Logger _log = Logger.getLogger("Minecraft");
     public static RestorationManager rm;
+    public static EnderchestManager em;
     public static FileConfiguration config = null;
     public static EmptyWorld[] rw = null;
     public static boolean AchtungEnabled = false;
@@ -61,8 +70,21 @@ public class ApatiteControler extends JavaPlugin implements Listener, CommandExe
 
     @Override
     public void onEnable() {
-        _log.info("[ApatiteControler] enabled!"); //вывод произвольного текста в консоль сервера
-
+        _log.info("["+this.getName()+"] enabled!"); //вывод произвольного текста в консоль сервера
+        ApatiteUpdater ua = new ApatiteUpdater(this.getName(), version, new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile()).getAbsolutePath());
+        ua.update();
+        if(ua.isUpdated){
+                safeMode = true;
+                Bukkit.getPluginManager().disablePlugin(this);
+                Bukkit.getPluginManager().getPlugin(null);
+                _log.log(Level.FINE, "======================================================================");
+                _log.log(Level.FINE, "This plugin was updated and now it can throw an exception about reloading");
+                _log.log(Level.FINE, "======================================================================");
+                Bukkit.reload();
+                return;
+        }
+        
+        
         loadConfig();
         loadWorlds();
 
@@ -81,10 +103,12 @@ public class ApatiteControler extends JavaPlugin implements Listener, CommandExe
         getCommand("spawn").setExecutor(new SpawnCommand());
 
         rm = new RestorationManager(this.getDataFolder());
+        em = new EnderchestManager(this.getDataFolder());
     }
 
     @Override
     public void onDisable() {
+        if(!safeMode){
         if (config.getBoolean("enable_reload_countdown")) {
             Bukkit.broadcastMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "[ApatiteControler] Перезагрузка сервера через 3 секунды");
             try {
@@ -98,6 +122,7 @@ public class ApatiteControler extends JavaPlugin implements Listener, CommandExe
         }
 
         this.saveConfig();
+        }
     }
 
     

@@ -4,6 +4,7 @@
  */
 package apatitecontroler.ApatiteScavenger;
 
+import apatitecontroler.ApatiteControler;
 import apatitecontroler.Utils;
 import com.comphenix.protocol.utility.StreamSerializer;
 import java.io.BufferedOutputStream;
@@ -70,14 +71,14 @@ public class RestorationManager {
                 }
         }
       }
-      restoration_s.enabled = value.enabled;
-      restoration_s.level = value.level;
-      restoration_s.exp = value.exp;
-      return restoration_s;
-  }
+        restoration_s.enabled = value.enabled;
+        restoration_s.level = value.level;
+        restoration_s.exp = value.exp;
+        return restoration_s;
+    }
     
     public Restoration getRestoration(ReadyToSave value) throws IOException{
-                StreamSerializer serializer;
+        StreamSerializer serializer;
         serializer = new StreamSerializer();
         Restoration restoration = new Restoration();
         restoration.inventory = new ItemStack[value.inventory.size()];
@@ -111,11 +112,16 @@ public class RestorationManager {
         return getRestorationFile(world,playerName).exists();
     }
     public void saveInventory(Player pl, String world){
+        // enderchest restoration manager
+        ApatiteControler.em.saveEnderchest(pl, world);
+        // inventory restoration manager
         File rf = getRestorationFile(world,pl.getName());
         if(rf.exists()) rf.delete();
         Restoration rt = new Restoration();
         rt.armour = pl.getInventory().getArmorContents();
         rt.inventory = pl.getInventory().getContents();
+        rt.level = pl.getLevel();
+        rt.exp = pl.getExp();
         try{
             rf.createNewFile();
             FileOutputStream os = new FileOutputStream(rf);
@@ -127,6 +133,7 @@ public class RestorationManager {
         catch(IOException ex){}
     }
     public void restoreInventory(Player pl, String world){
+      ApatiteControler.em.restoreEnderchest(pl, world);
       File rf = getRestorationFile(world,pl.getName());
       if(!rf.exists()) return;
       Restoration rs = null;
@@ -145,6 +152,9 @@ public class RestorationManager {
       pl.getInventory().clear();
       pl.getInventory().setContents(rs.inventory);
       pl.getInventory().setArmorContents(rs.armour);
+      pl.setLevel(rs.level);
+      pl.setExp(rs.exp);
+      
       Utils.sendMsg(pl, ChatColor.GREEN+"Инвентарь успешно восстановлен!");
     }
 }
