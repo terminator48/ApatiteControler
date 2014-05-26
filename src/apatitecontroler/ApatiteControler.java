@@ -39,7 +39,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Daniil
  */
 public class ApatiteControler extends JavaPlugin implements Listener, CommandExecutor {
-    public static int version = 3;
+    public static int version = 4;
     public static boolean safeMode = false;
     
     public static final Logger _log = Logger.getLogger("Minecraft");

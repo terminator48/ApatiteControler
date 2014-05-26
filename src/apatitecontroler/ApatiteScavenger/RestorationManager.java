@@ -111,6 +111,10 @@ public class RestorationManager {
     public boolean hasRestoration(String world, String playerName){
         return getRestorationFile(world,playerName).exists();
     }
+    public void removeRestoration(Player pl, String world){
+        File rf = getRestorationFile(world,pl.getName());
+        if(rf.exists()) rf.delete();
+    }
     public void saveInventory(Player pl, String world){
         // enderchest restoration manager
         ApatiteControler.em.saveEnderchest(pl, world);

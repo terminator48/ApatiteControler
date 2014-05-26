@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.potion.PotionEffectType;
 import apatitecontroler.worlds.ApatiteWorld;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 /**
  *
@@ -24,5 +25,9 @@ public class InventorySaver implements Listener{
         ApatiteControler.rm.saveInventory(e.getPlayer(), e.getFrom().getWorld().getName());
         ApatiteControler.rm.restoreInventory(e.getPlayer(), e.getTo().getWorld().getName());
         
-    } 
+    }
+    @EventHandler
+    public void PlayerDeathEvent(PlayerDeathEvent e){
+        ApatiteControler.rm.removeRestoration(e.getEntity(), e.getEntity().getLocation().getWorld().getName());
+    }
 }
